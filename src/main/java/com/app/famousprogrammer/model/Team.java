@@ -1,14 +1,10 @@
 package com.app.famousprogrammer.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
-
 
 @Data
 @AllArgsConstructor
@@ -24,9 +20,14 @@ public class Team {
 
     private String name;
     private LocalDate creationDate;
-    private Long teamLeaderId;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "teams")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "programmer_id")
+    private Programmer teamLeader;
+
+    @ManyToMany(mappedBy = "teams")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<Programmer> programmers;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -35,5 +36,7 @@ public class Team {
             joinColumns = @JoinColumn(name = "team_id"),
             inverseJoinColumns = @JoinColumn(name = "meeting_id")
     )
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<Meeting> meetings;
 }

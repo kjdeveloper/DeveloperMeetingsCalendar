@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -14,11 +13,9 @@ import java.util.Set;
 @Builder
 public class TeamDto {
 
-
     private Long id;
     private String name;
     private LocalDate creationDate;
-    private Long teamLeaderId;
-    private Set<ProgrammerDto> programmers;
-    private Set<MeetingDto> meetings;
+    private ProgrammerDto teamLeader;
+
 }

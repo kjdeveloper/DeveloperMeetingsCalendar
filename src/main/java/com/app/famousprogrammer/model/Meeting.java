@@ -1,11 +1,7 @@
 package com.app.famousprogrammer.model;
 
-
 import com.app.famousprogrammer.model.enums.City;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -24,23 +20,23 @@ public class Meeting {
     @GeneratedValue
     private Long id;
 
-    private String topic;
+    private String name;
     private String description;
     private LocalDateTime startDate;
-    private int duration;
+    private double duration;
 
-    @ElementCollection
-    @CollectionTable(name = "city",
-            joinColumns = @JoinColumn(name = "meeting_id", referencedColumnName = "id"))
+    @Enumerated(EnumType.STRING)
     private City placeOfMeeting;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "meetings")
-    private Set<Programmer> programmers = new HashSet<>();
+    @ManyToMany(mappedBy = "meetings")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<User> programmers = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "meetings")
-    private Set<User> users = new HashSet<>();
-
-    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "meetings")
+    @ManyToMany(mappedBy = "meetings")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<Team> teams = new HashSet<>();
 
 }
+

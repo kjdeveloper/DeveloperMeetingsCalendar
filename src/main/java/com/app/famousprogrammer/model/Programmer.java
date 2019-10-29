@@ -1,40 +1,35 @@
 package com.app.famousprogrammer.model;
 
+import com.app.famousprogrammer.model.enums.Roles;
 import com.app.famousprogrammer.model.enums.Skills;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @Entity
 @Table(name = "programmers")
-public class Programmer {
+public class Programmer extends User {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+    public Programmer() {
+    }
 
-    private String name;
-    private String surname;
-    private String username;
-    private LocalDate birthDate;
-    private String email;
+    public Programmer(Set<Team> teams, Set<Meeting> meetings, Set<Skills> skills) {
+        this.teams = teams;
+        this.meetings = meetings;
+        this.skills = skills;
+    }
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(
-            name = "programmers_meeting",
-            joinColumns = @JoinColumn(name = "programmer_id"),
-            inverseJoinColumns = @JoinColumn(name = "meeting_id")
-    )
-    private Set<Meeting> meetings;
+    public Programmer(Long id, String name, String surname, LocalDate birthDate,
+                      String email, String username,
+                      String password, Boolean enabled,
+                      Roles role) {
+    }
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
@@ -42,7 +37,19 @@ public class Programmer {
             joinColumns = @JoinColumn(name = "programmer_id"),
             inverseJoinColumns = @JoinColumn(name = "team_id")
     )
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<Team> teams;
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "programmers_meeting",
+            joinColumns = @JoinColumn(name = "programmer_id"),
+            inverseJoinColumns = @JoinColumn(name = "meeting_id")
+    )
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<Meeting> meetings;
 
     @ElementCollection
     @CollectionTable(name = "skills",
@@ -52,3 +59,4 @@ public class Programmer {
     private Set<Skills> skills;
 
 }
+

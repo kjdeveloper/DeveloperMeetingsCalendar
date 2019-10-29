@@ -7,8 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -20,10 +18,7 @@ public class MeetingDto {
     private String topic;
     private String description;
     private LocalDateTime startDate;
-    private int duration;
+    private double duration;
     private City placeOfMeeting;
-    private Set<ProgrammerDto> programmers = new HashSet<>();
-    private Set<UserDto> users = new HashSet<>();
-    private Set<TeamDto> teams = new HashSet<>();
 
 }

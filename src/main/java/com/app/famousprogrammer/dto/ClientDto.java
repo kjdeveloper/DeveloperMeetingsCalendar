@@ -6,19 +6,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserDto {
+public class ClientDto {
 
     private Long id;
     private String name;
     private String surname;
     private LocalDate birthDate;
     private String email;
-    private Set<MeetingDto> meetings;
+    private String username;
+    private String password;
+    private String passwordConfirmation;
+    private String role;
 
 }
