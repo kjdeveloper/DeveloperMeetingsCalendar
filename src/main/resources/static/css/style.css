@@ -7,22 +7,36 @@ html, body {
     color: #222;
 }
 
+nav img{
+    height: 70px;
+}
+
 nav {
     padding: 14px;
-    background-color: #696969;
+    background-color: #b4b4b4;
+    display: flex;
 }
 
 nav li {
-    padding-right: 20px;
+    padding-right: 16px;
+}
+
+
+nav .leftMenu{
+    flex: 1;
+}
+
+nav .searchForm{
+    width: 300px;
 }
 
 .nav-link {
-    font-size: 18px !important;
-    color: #d5d5d5;
+    font-size: 14px;
+    color: black;
 }
 
 .nav-link:hover {
-    color: #b4b4b4;
+    color: black;
 }
 
 .btn-primary {
@@ -35,14 +49,16 @@ nav li {
     border: 1px solid #563d7c;
 }
 
-#myCarousel {
-    height: 400px;
+.carousel-inner img{
+    height: 300px;
     width: 100%;
 }
 
 .jumbotron {
+    font-size: 16px;
     padding: 16px;
     border-radius: 0;
+    margin-bottom: 0;
 }
 
 .padding {
@@ -53,17 +69,9 @@ nav li {
     background-color: #f2f1e7;
 }
 
-.welcome {
-    width: 75%;
-    margin: 0 auto;
-    padding-top: 32px;
-}
-
-.welcome hr {
-    border-top: 2px solid #b4b4b4;
-    width: 95%;
-    margin-top: 4px;
-    margin-bottom: 16px;
+.card-body img{
+    height: 300px;
+    width: 200px
 }
 
 .fa-user-circle {
@@ -105,7 +113,8 @@ nav li {
 footer {
     background-color: #CA3E47;
     color: #d5d5d5;
-    padding-top: 32px;
+    padding: 32px;
+    margin-top: 32px;
 }
 
 hr.light {
@@ -119,82 +128,15 @@ footer a {
     color: #d5d5d5;
 }
 
+footer img{
+    height: 55px;
+}
+
 hr.light-100 {
     border-top: 1px solid #d5d5d5;
     width: 100%;
     margin-top: 12px;
     margin-bottom: 16px;
-}
-
-/*--Media Queries--*/
-@media (max-width: 992px) {
-    .social a {
-        font-size: 64px;
-        padding: 32px;
-    }
-}
-
-@media (max-width: 768px) {
-    .carousel-caption {
-        top: 45%;
-    }
-
-    .carousel-caption h1 {
-        font-size: 350%;
-    }
-
-    .carousel-caption h3 {
-        font-size: 140%;
-        font-weight: 400;
-        padding-bottom: 3px;
-    }
-
-    .carousel-caption .btn {
-        font-size: 95%;
-        padding: 8px 14px;
-    }
-
-    .display-4 {
-        font-size: 200%;
-    }
-
-    .social a {
-        font-size: 40px;
-        padding: 18px;
-    }
-
-}
-
-@media (max-width: 576px) {
-    .carousel-caption {
-        top: 40%;
-    }
-
-    .carousel-caption h1 {
-        font-size: 250%;
-    }
-
-    .carousel-caption h3 {
-        font-size: 110%;
-    }
-
-    .carousel-caption .btn {
-        font-size: 90%;
-        padding: 4px 8px;
-    }
-
-    .carousel-indicators {
-
-    }
-
-    .display-4 {
-        font-size: 160%;
-    }
-
-    .social a {
-        font-size: 32px;
-        padding: 14px;
-    }
 }
 
 

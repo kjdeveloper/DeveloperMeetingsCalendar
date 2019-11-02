@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Create new user</title>
     <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/createUser.css">
     <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
@@ -27,9 +29,17 @@
                             <input id="name" type="text" class="form-control" th:field="*{name}"/>
                         </div>
 
+                        <div th:if="${errors.containsKey('name')}">
+                            <label class="text-danger" th:text="${errors.get('name')}"></label>
+                        </div>
+
                         <div class="form-group">
                             <label for="surname">Surname</label>
                             <input id="surname" type="text" class="form-control" th:field="*{surname}"/>
+                        </div>
+
+                        <div th:if="${errors.containsKey('surname')}">
+                            <label class="text-danger" th:text="${errors.get('surname')}"></label>
                         </div>
 
                         <div class="form-group">
@@ -37,9 +47,17 @@
                             <input id="birthDate" type="date" class="form-control" th:field="*{birthDate}"/>
                         </div>
 
+                        <div th:if="${errors.containsKey('birthDate')}">
+                            <label class="text-danger" th:text="${errors.get('birthDate')}"></label>
+                        </div>
+
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input id="email" type="email" class="form-control" th:field="*{email}"/>
+                        </div>
+
+                        <div th:if="${errors.containsKey('email')}">
+                            <label class="text-danger" th:text="${errors.get('email')}"></label>
                         </div>
 
                         <div class="form-group">
@@ -47,9 +65,17 @@
                             <input id="username" type="text" class="form-control" th:field="*{username}"/>
                         </div>
 
+                        <div th:if="${errors.containsKey('username')}">
+                            <label class="text-danger" th:text="${errors.get('username')}"></label>
+                        </div>
+
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input id="password" type="password" class="form-control" th:field="*{password}"/>
+                        </div>
+
+                        <div th:if="${errors.containsKey('password')}">
+                            <label class="text-danger" th:text="${errors.get('password')}"></label>
                         </div>
 
                         <div class="form-group">
@@ -57,6 +83,31 @@
                             <input id="passwordConfirmation" type="password" class="form-control"
                                    th:field="*{passwordConfirmation}"/>
                         </div>
+
+                        <div th:if="${errors.containsKey('passwordConfirmation')}">
+                            <label class="text-danger" th:text="${errors.get('passwordConfirmation')}"></label>
+                        </div>
+
+                            <div class="form-group">
+                                <label>Role</label>
+                                <ul class="list-group">
+                                    <li th:each="r : ${roles}">
+                                        <input checked type="radio" th:field="*{role}" th:value="${r}"/>
+                                        <label th:text="${r}"></label>
+                                        <div class="bullet">
+                                            <div class="line zero"></div>
+                                            <div class="line one"></div>
+                                            <div class="line two"></div>
+                                            <div class="line three"></div>
+                                            <div class="line four"></div>
+                                            <div class="line five"></div>
+                                            <div class="line six"></div>
+                                            <div class="line seven"></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
                         <div class="form-group">
                             <button type="submit" class="btn btn-success">Create</button>
                             <button type="reset" class="btn btn-outline-danger">Reset</button>
@@ -67,6 +118,8 @@
         </div>
     </div>
 </div>
+
+<div th:replace="/fragments/footer.html"></div>
 
 </body>
 
