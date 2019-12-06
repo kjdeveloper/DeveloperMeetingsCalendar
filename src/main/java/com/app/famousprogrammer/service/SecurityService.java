@@ -20,9 +20,6 @@ import java.util.Objects;
 @Transactional
 public class SecurityService {
 
-    private final MeetingRepository meetingRepository;
-    private final ProgrammerRepository programmerRepository;
-    private final TeamRepository teamRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -44,17 +41,11 @@ public class SecurityService {
             throw new MyException("user registration - email currently exists in our database");
         }
 
-        User user = User.builder()
-                .name(userDto.getName())
-                .surname(userDto.getSurname())
-                .birthDate(userDto.getBirthDate())
-                .email(userDto.getEmail())
-                .enabled(true)
-                .password(passwordEncoder.encode(userDto.getPassword()))
-                .role(Roles._USER)
-                .build();
+        User user = Mappers.fromUserDtoToUser(userDto);
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
         User inserted = userRepository.save(user);
         return  inserted.getUsername() + " has been registered.";
     }
 }
+

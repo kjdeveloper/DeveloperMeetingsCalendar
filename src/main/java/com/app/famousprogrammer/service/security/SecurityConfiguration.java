@@ -14,21 +14,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
 
-    public SecurityConfiguration( @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
+    public SecurityConfiguration(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-
                 .authorizeRequests()
-                .antMatchers("/security/**", "/css/**", "/js/**", "/webjars/**", "/index").permitAll()
-                .antMatchers("/users/").hasAnyRole("ROLE_USER")
-                .antMatchers("/admin/").hasAnyRole("ROLE_PROGRAMMER")
+                .antMatchers("/contact/**", "/security/**", "/css/**", "/js/**", "/webjars/**", "/index", "/").permitAll()
+                .antMatchers("/client/**").hasAnyRole("ROLE_CLIENT")
+                .antMatchers("/programmer/**").hasAnyRole("ROLE_PROGRAMMER")
+                .antMatchers("/team/**").hasAnyRole("ROLE_TEAM")
+                .antMatchers("/user/**").hasAnyRole("ROLE_USER")
                 .anyRequest().authenticated()
 
-                .and().formLogin()
+                .and()
+                .formLogin()
 
                 .and()
                 .httpBasic();
