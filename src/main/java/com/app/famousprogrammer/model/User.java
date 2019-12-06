@@ -8,15 +8,15 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
-@Inheritance
 @Table(name = "users")
-public abstract class User {
+public class User {
 
     @Id
     @GeneratedValue
@@ -29,8 +29,22 @@ public abstract class User {
     private String username;
     private String password;
     private Boolean enabled;
+    private String filename;
 
+    @ElementCollection
+    @CollectionTable(
+            name = "roles",
+            joinColumns = @JoinColumn(name = "user_id")
+    )
+    @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private Roles role;
+    private Set<Roles> role;
 
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "programmer_id", unique = true)
+    private Programmer programmer;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "client_id")
+    private Client client;
 }

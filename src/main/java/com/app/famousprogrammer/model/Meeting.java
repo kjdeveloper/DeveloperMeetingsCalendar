@@ -21,6 +21,7 @@ public class Meeting {
     private Long id;
 
     private String name;
+    private String topic;
     private String description;
     private LocalDateTime startDate;
     private double duration;
@@ -28,12 +29,17 @@ public class Meeting {
     @Enumerated(EnumType.STRING)
     private City placeOfMeeting;
 
-    @ManyToMany(mappedBy = "meetings")
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "meetings")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private Set<User> programmers = new HashSet<>();
+    private Set<Programmer> programmers_meeting = new HashSet<>();
 
-    @ManyToMany(mappedBy = "meetings")
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "meetings")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<Client> clients_meeting = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "meetings")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Team> teams = new HashSet<>();

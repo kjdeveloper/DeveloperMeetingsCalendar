@@ -25,14 +25,14 @@ public class Team {
     @JoinColumn(name = "programmer_id")
     private Programmer teamLeader;
 
-    @ManyToMany(mappedBy = "teams")
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "teams")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Programmer> programmers;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
-            name = "teams_meeting",
+            name = "teams_meetings",
             joinColumns = @JoinColumn(name = "team_id"),
             inverseJoinColumns = @JoinColumn(name = "meeting_id")
     )

@@ -1,39 +1,40 @@
 package com.app.famousprogrammer.model;
 
-import com.app.famousprogrammer.model.enums.Roles;
 import com.app.famousprogrammer.model.enums.Skills;
 import lombok.*;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Set;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "programmers")
-public class Programmer extends User {
+public class Programmer {
 
-    public Programmer() {
-    }
+    @Id
+    @GeneratedValue
+    private Long id;
 
-    public Programmer(Set<Team> teams, Set<Meeting> meetings, Set<Skills> skills) {
-        this.teams = teams;
-        this.meetings = meetings;
-        this.skills = skills;
-    }
+  /*  private String name;
+    private String surname;
+    private LocalDate birthDate;
+    private String email;
+    private String username;
+    private String password;
+    private Boolean enabled;
 
-    public Programmer(Long id, String name, String surname, LocalDate birthDate,
-                      String email, String username,
-                      String password, Boolean enabled,
-                      Roles role) {
-    }
+    @Enumerated(EnumType.STRING)
+    private Roles role;*/
+
+    @OneToOne(mappedBy = "programmer")
+    private User user;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
-            name = "programmers_team",
+            name = "programmers_teams",
             joinColumns = @JoinColumn(name = "programmer_id"),
             inverseJoinColumns = @JoinColumn(name = "team_id")
     )
@@ -43,7 +44,7 @@ public class Programmer extends User {
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
-            name = "programmers_meeting",
+            name = "programmers_meetings",
             joinColumns = @JoinColumn(name = "programmer_id"),
             inverseJoinColumns = @JoinColumn(name = "meeting_id")
     )
