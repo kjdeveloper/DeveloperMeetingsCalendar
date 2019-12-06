@@ -17,18 +17,6 @@ public class Client {
     @GeneratedValue
     private Long id;
 
-  /*  private String name;
-    private String surname;
-    private LocalDate birthDate;
-    private String email;
-    private String username;
-    private String password;
-    private Boolean enabled;
-
-    @Enumerated(EnumType.STRING)
-    private Roles role;
-*/
-
     @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "client")
     private User user;
 
